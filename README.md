@@ -1,7 +1,11 @@
 # Calculator
 
 An on-screen calculator using JavaScript, HTML, and CSS.
-These are the main features the app must have: - For security reasons, the eval() functions shall not be used; - The calculater must be able to perform add, subtract, divide and multiply operations; - Should not evaluate more than a single pair of numbers at a time. If you enter a number then an operator and another number that calculation should be displayed if your next input is an operator. The result of the calculation should be used as the first number in your new calculation;
+These are the main features the app must have:
+
+- For security reasons, the eval() functions shall not be used;
+- The calculater must be able to perform add, subtract, divide and multiply operations;
+- Should not evaluate more than a single pair of numbers at a time. If you enter a number then an operator and another number that calculation should be displayed if your next input is an operator. The result of the calculation should be used as the first number in your new calculation;
 
 ## Motivation
 
