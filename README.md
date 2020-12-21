@@ -9,7 +9,8 @@ These are the main features the app must have:
 
 ## Motivation
 
-This part of the [The Odin Project](https://www.theodinproject.com/) foundations course. This is another opportunity to improve my HTML, CSS and Javascript skills.
+Some months ago I've developed a command-line based [calculator](https://github.com/jofortunato/calc) (including expressions with parentheses) using Python. This time, although being a simpler calculator, it is a web-based calculator using HTML, CSS, and Javascript.
+This part of the [The Odin Project](https://www.theodinproject.com/) foundations course.
 
 ## Development
 
