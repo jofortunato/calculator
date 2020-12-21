@@ -1,0 +1,85 @@
+:root {
+  /*--dark-blue: #043353;
+  --blue: #18a4e0;
+  --grey: #d3dde6;
+  --white: #ebebe7;
+  */
+  --dark-blue: #080e2c;
+  --mid-dark-blue: #081d5c;
+  --blue: #44d6e9;
+  --grey: #d1e0db;
+  --white: #ecf4f1;
+  --content-max-width: 400px;
+  --content-width: 85vw;
+}
+
+html {
+  background-color: var(--white);
+  /*background: linear-gradient(45deg, #ffedd7, #fbf3e8);*/
+  font-family: "Roboto", sans-serif;
+}
+
+#main-container {
+  width: var(--content-width);
+  max-width: var(--content-max-width);
+  margin: 50px auto;
+  border: 1px solid var(--grey);
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 30px rgba(32, 33, 36, 0.28);
+}
+
+#displays-container {
+  margin: 30px 20px 15px 20px;
+  padding: 5px 20px;
+  border: 1px solid var(--white);
+  border-radius: 10px;
+  text-align: right;
+}
+
+#secundary-display {
+  line-height: 40px;
+  border-bottom: 1px solid var(--white);
+  font-size: 18px;
+  color: var(--dark-blue);
+  opacity: 70%;
+}
+
+#primary-display {
+  line-height: 50px;
+  font-size: 32px;
+  color: var(--dark-blue);
+}
+
+#btns-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 10px 10px;
+  margin: 30px 20px 20px 20px;
+  max-height: 400px;
+  height: 60vh;
+}
+
+button {
+  background-color: var(--dark-blue);
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#equal {
+  grid-column: 3/5;
+  background-color: var(--blue);
+}
+
+.number-keys {
+  background-color: var(--mid-dark-blue);
+}
