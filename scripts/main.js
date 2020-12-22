@@ -24,6 +24,9 @@ keysContainer.addEventListener("click", e => {
     if (e.target.classList.contains("number-keys")) {
         writePrimaryDisplay(e.target);
     }
+    else if (e.target.id === "clear-all") {
+        clearAll();
+    }
 }, false);
 
 const add = (number1, number2) => number1 + number2;
@@ -100,6 +103,7 @@ const enableButton = button => button.classList.remove("disabled");
 
 function clearAll() {
     primaryDisplayNumber = "";
+    hasDecimalPoint = false;
     primaryDisplay.textContent = "";
 
     /* Not yet developed:
