@@ -54,11 +54,14 @@ function writePrimaryDisplay (numberButton) {
     
     if (numberButton.value === "-") {
         if (primaryDisplayNumber.length !== 0) {
-            if (primaryDisplayNumber !== "0.") {
-                primaryDisplayNumber = -1*primaryDisplayNumber;
+            if (primaryDisplayNumber === "0.") {
+                return;
+            }
+            else if (primaryDisplayNumber === "-") {
+                primaryDisplayNumber = "";
             }
             else {
-                return;
+                primaryDisplayNumber = -1*primaryDisplayNumber;
             }
         }
         else {
@@ -67,7 +70,7 @@ function writePrimaryDisplay (numberButton) {
     }
     else if (numberButton.value === ".") {
         if (hasDecimalPoint === true) {
-        return;
+            return;
         }
         else {
             hasDecimalPoint = true;
