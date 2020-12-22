@@ -20,7 +20,7 @@ darkThemeToggle.addEventListener("click", () => {
 
 keysContainer.addEventListener("click", e => {
     if (e.target.classList.contains("number-keys")) {
-        writePrimaryDisplay(e.target.value);
+        writePrimaryDisplay(e.target);
     }
 }, false);
 
@@ -47,29 +47,41 @@ function operate(number1, number2, operator) {
     }
 }
 
-function writePrimaryDisplay (char) {
+function writePrimaryDisplay (numberButton) {
     if (primaryDisplayNumber.length >= 10) {
         return;
     }
-    else if (char === "-" && primaryDisplayNumber.length !== 0) {
-        return;
-    }
-    else if (char === "." && hasDecimalPoint === true) {
-        return;
-    }
-    else if (char === "." && hasDecimalPoint === false) {
-        hasDecimalPoint = true;
-        if (primaryDisplayNumber.length === 0 || primaryDisplayNumber === "-") {
-            primaryDisplayNumber += "0" + char;
+    
+    if (numberButton.value === "-") {
+        if (primaryDisplayNumber.length !== 0) {
+            return;
         }
         else {
-            primaryDisplayNumber += char;
+            disableButton(numberButton);
+            primaryDisplayNumber += numberButton.value;
         }
-        
+    }
+    else if (numberButton.value === ".") {
+        if (hasDecimalPoint === true) {
+        return;
+        }
+        else {
+            hasDecimalPoint = true;
+            disableButton(numberButton);
+            if (primaryDisplayNumber.length === 0 || primaryDisplayNumber === "-") {
+                primaryDisplayNumber += "0" + numberButton.value;
+            }
+            else {
+                primaryDisplayNumber += numberButton.value;
+            }
+        }
     }
     else {
-        primaryDisplayNumber += char;
+        primaryDisplayNumber += numberButton.value;
     }
     
     primaryDisplay.textContent = primaryDisplayNumber; 
 }
+
+const disableButton = button => button.classList.add("disabled");
+const enableButton = button => button.classList.remove("disabled");
