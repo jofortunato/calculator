@@ -83,6 +83,9 @@ function writePrimaryDisplay (numberButton) {
             }
         }
     }
+    else if (numberButton.value === "0" && primaryDisplayNumber === "0") {
+        return;
+    }
     else {
         primaryDisplayNumber += numberButton.value;
     }
