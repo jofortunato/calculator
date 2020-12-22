@@ -1,5 +1,8 @@
 let primaryDisplayNumber = "";
 let hasDecimalPoint = false;
+let result = undefined;
+let operator = undefined;
+
 const pageBody = document.querySelector("body");
 const darkThemeToggle = document.querySelector("#dark-theme-input");
 const keysContainer = document.querySelector("#btns-container");
@@ -22,10 +25,38 @@ darkThemeToggle.addEventListener("click", () => {
 
 keysContainer.addEventListener("click", e => {
     if (e.target.classList.contains("number-keys")) {
+        if (result !== undefined && operator === undefined) {
+            result = undefined;
+            resetDisplays();
+        }
         writePrimaryDisplay(e.target);
     }
+    else if (e.target.classList.contains("operators")) {
+        if (result === undefined && operator === undefined) {
+            operator = e.target.value;
+            result = parseInt(primaryDisplayNumber);
+            resetDisplays();
+        }
+        else if (result !== undefined && operator === undefined){
+            operator = e.target.value;
+        }
+        else if (result !== undefined && operator !== undefined) {
+            result = operate(result,parseInt(primaryDisplayNumber),operator);
+            operator = e.target.value;
+            resetDisplays();
+            primaryDisplay.textContent = result;
+        }        
+    }
+    else if (e.target.id === "equal") {
+        if (result !== undefined && operator !== undefined) {
+            result = operate(result,parseInt(primaryDisplayNumber),operator);
+            resetDisplays();
+            primaryDisplay.textContent = result;
+            operator = undefined;
+        }
+    }
     else if (e.target.id === "clear-all") {
-        clearAll();
+        resetDisplays();
     }
 }, false);
 
@@ -101,7 +132,7 @@ function writePrimaryDisplay (numberButton) {
 const disableButton = button => button.classList.add("disabled");
 const enableButton = button => button.classList.remove("disabled");
 
-function clearAll() {
+function resetDisplays() {
     primaryDisplayNumber = "";
     hasDecimalPoint = false;
     primaryDisplay.textContent = "";
