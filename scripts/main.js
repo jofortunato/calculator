@@ -13,3 +13,8 @@ darkThemeToggle.addEventListener("click", () => {
     }
 
 }, false);
+
+const add = (number1, number2) => number1 + number2;
+const subtract = (number1, number2) => number1 - number2;
+const multiply = (number1, number2) => number1 * number2;
+const divide = (numerator, denominator) => numerator/denominator;
