@@ -4,6 +4,8 @@ const pageBody = document.querySelector("body");
 const darkThemeToggle = document.querySelector("#dark-theme-input");
 const keysContainer = document.querySelector("#btns-container");
 const primaryDisplay = document.querySelector("#primary-display");
+const secundaryDisplay = document.querySelector("#secundary-display");
+const keys = document.querySelectorAll("button");
 
 let isOnDarkTheme = false;
 darkThemeToggle.addEventListener("click", () => {
@@ -95,3 +97,16 @@ function writePrimaryDisplay (numberButton) {
 
 const disableButton = button => button.classList.add("disabled");
 const enableButton = button => button.classList.remove("disabled");
+
+function clearAll() {
+    primaryDisplayNumber = "";
+    primaryDisplay.textContent = "";
+
+    /* Not yet developed:
+    secundaryDisplay.textContent = "";
+    */
+
+    for (let i = 0; i < keys.length; ++i) {
+        enableButton(keys[i]);
+    }
+}
