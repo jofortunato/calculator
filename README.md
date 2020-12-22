@@ -16,8 +16,8 @@ This part of the [The Odin Project](https://www.theodinproject.com/) foundations
 
 - [x] UI development - clean, modern and fresh UI;
 - [x] Add dark theme;
-- [ ] Create the add(), subtract(), multiply() and divide() functions with Javascript;
-- [ ] Create an operate() function - takes two numbers and calls the correct above function to get the result;
+- [x] Create the add(), subtract(), multiply() and divide() functions with Javascript;
+- [x] Create an operate() function - takes two numbers and calls the correct above function to get the result;
 - [ ] Create the functions that populate the primary display when the number buttons are clicked. The ‘display value’ should be stored in a variable somewhere for use in the next step;
 - [ ] When the user presses the “=” key or an operator key, the operate() function must be called and the result printed to the primary display;
 - [ ] Create the clear() function - must clean the displays and delete all stored values;
