@@ -27,7 +27,7 @@ keysContainer.addEventListener("click", e => {
     if (e.target.classList.contains("number-keys")) {
         if (result !== undefined && operator === undefined) {
             result = undefined;
-            resetDisplays();
+            resetUI();
         }
         writePrimaryDisplay(e.target);
     }
@@ -35,7 +35,7 @@ keysContainer.addEventListener("click", e => {
         if (result === undefined && operator === undefined) {
             operator = e.target.value;
             result = parseInt(primaryDisplayNumber);
-            resetDisplays();
+            resetUI();
         }
         else if (result !== undefined && operator === undefined){
             operator = e.target.value;
@@ -43,20 +43,20 @@ keysContainer.addEventListener("click", e => {
         else if (result !== undefined && operator !== undefined) {
             result = operate(result,parseInt(primaryDisplayNumber),operator);
             operator = e.target.value;
-            resetDisplays();
+            resetUI();
             primaryDisplay.textContent = result;
         }        
     }
     else if (e.target.id === "equal") {
         if (result !== undefined && operator !== undefined) {
             result = operate(result,parseInt(primaryDisplayNumber),operator);
-            resetDisplays();
+            resetUI();
             primaryDisplay.textContent = result;
             operator = undefined;
         }
     }
     else if (e.target.id === "clear-all") {
-        resetDisplays();
+        clearAll();
     }
 }, false);
 
@@ -132,7 +132,7 @@ function writePrimaryDisplay (numberButton) {
 const disableButton = button => button.classList.add("disabled");
 const enableButton = button => button.classList.remove("disabled");
 
-function resetDisplays() {
+function resetUI() {
     primaryDisplayNumber = "";
     hasDecimalPoint = false;
     primaryDisplay.textContent = "";
@@ -144,4 +144,10 @@ function resetDisplays() {
     for (let i = 0; i < keys.length; ++i) {
         enableButton(keys[i]);
     }
+}
+
+function clearAll() {
+    resetUI();
+    result = undefined;
+    operator = undefined;
 }
