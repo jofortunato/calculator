@@ -1,7 +1,11 @@
+let primaryDisplayNumber = "";
+let hasDecimalPoint = false;
 const pageBody = document.querySelector("body");
 const darkThemeToggle = document.querySelector("#dark-theme-input");
-let isOnDarkTheme = false;
+const keysContainer = document.querySelector("#btns-container");
+const primaryDisplay = document.querySelector("#primary-display");
 
+let isOnDarkTheme = false;
 darkThemeToggle.addEventListener("click", () => {
     if (!isOnDarkTheme) {
         isOnDarkTheme = true;
@@ -12,6 +16,12 @@ darkThemeToggle.addEventListener("click", () => {
         pageBody.classList.remove("dark-theme");
     }
 
+}, false);
+
+keysContainer.addEventListener("click", e => {
+    if (e.target.classList.contains("number-keys")) {
+        writePrimaryDisplay(e.target.value);
+    }
 }, false);
 
 const add = (number1, number2) => number1 + number2;
@@ -35,4 +45,31 @@ function operate(number1, number2, operator) {
         default:
             return undefined
     }
+}
+
+function writePrimaryDisplay (char) {
+    if (primaryDisplayNumber.length >= 10) {
+        return;
+    }
+    else if (char === "-" && primaryDisplayNumber.length !== 0) {
+        return;
+    }
+    else if (char === "." && hasDecimalPoint === true) {
+        return;
+    }
+    else if (char === "." && hasDecimalPoint === false) {
+        hasDecimalPoint = true;
+        if (primaryDisplayNumber.length === 0 || primaryDisplayNumber === "-") {
+            primaryDisplayNumber += "0" + char;
+        }
+        else {
+            primaryDisplayNumber += char;
+        }
+        
+    }
+    else {
+        primaryDisplayNumber += char;
+    }
+    
+    primaryDisplay.textContent = primaryDisplayNumber; 
 }
