@@ -54,10 +54,14 @@ function writePrimaryDisplay (numberButton) {
     
     if (numberButton.value === "-") {
         if (primaryDisplayNumber.length !== 0) {
-            return;
+            if (primaryDisplayNumber !== "0.") {
+                primaryDisplayNumber = -1*primaryDisplayNumber;
+            }
+            else {
+                return;
+            }
         }
         else {
-            disableButton(numberButton);
             primaryDisplayNumber += numberButton.value;
         }
     }
