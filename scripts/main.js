@@ -31,10 +31,14 @@ keysContainer.addEventListener("click", e => {
             result = undefined;
             resetUI();
         }
+        else if (primaryDisplayNumber === "ERROR")
+        {
+            resetUI();
+        }
         writePrimaryDisplay(e.target);
     }
     else if (e.target.classList.contains("operators")) {
-        if (result === undefined && operator === undefined) {
+        if (result === undefined && operator === undefined && primaryDisplayNumber !== "ERROR") {
             operator = e.target.value;
             result = parseFloat(primaryDisplayNumber);
             resetUI();
@@ -47,6 +51,7 @@ keysContainer.addEventListener("click", e => {
             operator = e.target.value;
             resetUI();
             primaryDisplay.textContent = result;
+            errorHandling(result);
         }        
     }
     else if (e.target.id === "equal") {
@@ -55,6 +60,7 @@ keysContainer.addEventListener("click", e => {
             resetUI();
             primaryDisplay.textContent = result;
             operator = undefined;
+            errorHandling(result);
         }
     }
     else if (e.target.id === "clear-all") {
@@ -75,26 +81,26 @@ function operate(number1, number2, operator) {
         return undefined;
     }
 
-    let result = undefined;
+    let operationResult = undefined;
 
     switch (operator) {
         case "+":
-            result = add(number1,number2);
+            operationResult = add(number1,number2);
             break;
         case "-":
-            result = subtract(number1, number2);
+            operationResult = subtract(number1, number2);
             break;
         case "*":
-            result = multiply(number1, number2);
+            operationResult = multiply(number1, number2);
             break;
         case "/":
-            result = divide(number1, number2);
+            operationResult = divide(number1, number2);
             break;
         default:
             return undefined;
     }
 
-    return parseFloat(result.toPrecision(maxPrimaryDisplayLength));
+    return parseFloat(operationResult.toPrecision(maxPrimaryDisplayLength));
 }
 
 function writePrimaryDisplay (numberButton) {
@@ -173,4 +179,12 @@ function backspace () {
     }
     primaryDisplayNumber = primaryDisplayNumber.slice(0, -1);
     primaryDisplay.textContent = primaryDisplayNumber;
+}
+
+function errorHandling(result) {
+    if (result === Infinity || result === NaN) {
+        clearAll();
+        primaryDisplayNumber = "ERROR"
+        primaryDisplay.textContent = "ERROR";
+    }
 }
