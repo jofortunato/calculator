@@ -19,10 +19,11 @@ This part of the [The Odin Project](https://www.theodinproject.com/) foundations
 - [x] Create the add(), subtract(), multiply() and divide() functions with Javascript;
 - [x] Create an operate() function - takes two numbers and calls the correct above function to get the result;
 - [x] Create the functions that populate the primary display when the number buttons are clicked. The ‘display value’ should be stored in a variable somewhere for use in the next step;
-- [ ] When the user presses the “=” key or an operator key, the operate() function must be called and the result printed to the primary display;
+- [x] When the user presses the “=” key or an operator key, the operate() function must be called and the result printed to the primary display;
 - [x] Create the clear() function - must clean the displays and delete all stored values;
-- [ ] Add a "." button and let users input decimals. Don’t let users type more than one: disable the decimal button if there’s already one in the display;
+- [x] Add a "." button and let users input decimals. Don’t let users type more than one: disable the decimal button if there’s already one in the display;
 - [ ] Add a “backspace” button, so the user can undo if they click the wrong number.
+- [ ] Add secundary view with history of the current calculation.
 - [ ] Add keyboard support.
 
 ## Bugs, Advices and Lessons Learned
