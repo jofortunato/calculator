@@ -110,7 +110,7 @@
     }
 
     function errorHandling(result) {
-        if (result === Infinity || result === NaN) {
+        if (result === Infinity || Number.isNaN(result)) {
             clearAll();
             primaryDisplayNumber = "ERROR"
             primaryDisplay.textContent = "ERROR";
