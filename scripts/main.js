@@ -1,4 +1,5 @@
 let primaryDisplayNumber = "";
+const maxPrimaryDisplayLength = 10;
 let hasDecimalPoint = false;
 let result = undefined;
 let operator = undefined;
@@ -34,14 +35,14 @@ keysContainer.addEventListener("click", e => {
     else if (e.target.classList.contains("operators")) {
         if (result === undefined && operator === undefined) {
             operator = e.target.value;
-            result = parseInt(primaryDisplayNumber);
+            result = parseFloat(primaryDisplayNumber);
             resetUI();
         }
         else if (result !== undefined && operator === undefined){
             operator = e.target.value;
         }
         else if (result !== undefined && operator !== undefined) {
-            result = operate(result,parseInt(primaryDisplayNumber),operator);
+            result = operate(result,parseFloat(primaryDisplayNumber),operator);
             operator = e.target.value;
             resetUI();
             primaryDisplay.textContent = result;
@@ -49,7 +50,7 @@ keysContainer.addEventListener("click", e => {
     }
     else if (e.target.id === "equal") {
         if (result !== undefined && operator !== undefined) {
-            result = operate(result,parseInt(primaryDisplayNumber),operator);
+            result = operate(result,parseFloat(primaryDisplayNumber),operator);
             resetUI();
             primaryDisplay.textContent = result;
             operator = undefined;
@@ -67,24 +68,33 @@ const divide = (numerator, denominator) => numerator/denominator;
 
 function operate(number1, number2, operator) {
     if (typeof(number1) !== "number" || typeof(number2) !== "number") {
-        return undefined
+        return undefined;
     }
+
+    let result = undefined;
+
     switch (operator) {
         case "+":
-            return add(number1,number2)
+            result = add(number1,number2);
+            break;
         case "-":
-            return subtract(number1, number2)
+            result = subtract(number1, number2);
+            break;
         case "*":
-            return multiply(number1, number2)
+            result = multiply(number1, number2);
+            break;
         case "/":
-            return divide(number1, number2)
+            result = divide(number1, number2);
+            break;
         default:
-            return undefined
+            return undefined;
     }
+
+    return parseFloat(result.toPrecision(maxPrimaryDisplayLength));
 }
 
 function writePrimaryDisplay (numberButton) {
-    if (primaryDisplayNumber.length >= 10) {
+    if (primaryDisplayNumber.length >= maxPrimaryDisplayLength) {
         return;
     }
     
