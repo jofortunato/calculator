@@ -10,6 +10,7 @@ const keysContainer = document.querySelector("#btns-container");
 const primaryDisplay = document.querySelector("#primary-display");
 const secundaryDisplay = document.querySelector("#secundary-display");
 const keys = document.querySelectorAll("button");
+const decimalButton = document.querySelector("#decimal");
 
 let isOnDarkTheme = false;
 darkThemeToggle.addEventListener("click", () => {
@@ -59,6 +60,9 @@ keysContainer.addEventListener("click", e => {
     else if (e.target.id === "clear-all") {
         clearAll();
     }
+    else if (e.target.classList.contains("backspace")) {
+        backspace();
+    }
 }, false);
 
 const add = (number1, number2) => number1 + number2;
@@ -107,7 +111,7 @@ function writePrimaryDisplay (numberButton) {
                 primaryDisplayNumber = "";
             }
             else {
-                primaryDisplayNumber = -1*primaryDisplayNumber;
+                primaryDisplayNumber = (-1*primaryDisplayNumber).toString();
             }
         }
         else {
@@ -160,4 +164,13 @@ function clearAll() {
     resetUI();
     result = undefined;
     operator = undefined;
+}
+
+function backspace () {
+    if (primaryDisplayNumber.slice(-1) === ".") {
+        hasDecimalPoint = false;
+        enableButton(decimalButton);
+    }
+    primaryDisplayNumber = primaryDisplayNumber.slice(0, -1);
+    primaryDisplay.textContent = primaryDisplayNumber;
 }

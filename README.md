@@ -22,7 +22,7 @@ This part of the [The Odin Project](https://www.theodinproject.com/) foundations
 - [x] When the user presses the “=” key or an operator key, the operate() function must be called and the result printed to the primary display;
 - [x] Create the clear() function - must clean the displays and delete all stored values;
 - [x] Add a "." button and let users input decimals. Don’t let users type more than one: disable the decimal button if there’s already one in the display;
-- [ ] Add a “backspace” button, so the user can undo if they click the wrong number.
+- [x] Add a “backspace” button, so the user can undo if they click the wrong number.
 - [ ] Add secundary view with history of the current calculation.
 - [ ] Add keyboard support.
 
