@@ -1,4 +1,4 @@
-# Calculator
+# Calculator - Use it [HERE](https://jofortunato.github.io/calculator/)
 
 An on-screen calculator using JavaScript, HTML, and CSS.
 These are the main features the app must have:
@@ -7,12 +7,20 @@ These are the main features the app must have:
 - The calculater must be able to perform add, subtract, divide and multiply operations;
 - Should not evaluate more than a single pair of numbers at a time. If you enter a number then an operator and another number that calculation should be displayed if your next input is an operator. The result of the calculation should be used as the first number in your new calculation;
 
+## Current Status:
+
+Calculator is working properly.
+There is not a secundary display to show the previous calculations steps (there is a dummy value inserted for UI purposes only).
+Does not support keyboard inputs yet.
+
 ## Motivation
 
 Some months ago I've developed a command-line based [calculator](https://github.com/jofortunato/calc) (including expressions with parentheses) using Python. This time, although being a simpler calculator, it is a web-based calculator using HTML, CSS, and Javascript.
 This part of the [The Odin Project](https://www.theodinproject.com/) foundations course.
 
 ## Development
+
+### To-do:
 
 - [x] UI development - clean, modern and fresh UI;
 - [x] Add dark theme;
