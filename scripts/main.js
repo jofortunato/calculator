@@ -31,7 +31,7 @@
         return parseFloat(operationResult.toPrecision(maxPrimaryDisplayLength));
     }
 
-    function writePrimaryDisplayNumber (numberButton) {
+    function updatePrimaryDisplay (numberButton) {
         if (primaryDisplayNumber.length >= maxPrimaryDisplayLength) {
             return;
         }
@@ -80,7 +80,7 @@
     const disableButton = button => button.classList.add("disabled");
     const enableButton = button => button.classList.remove("disabled");
 
-    function resetUI() {
+    function resetPrimaryUI() {
         primaryDisplayNumber = "";
         hasDecimalPoint = false;
         primaryDisplay.textContent = "";
@@ -95,7 +95,7 @@
     }
 
     function clearAll() {
-        resetUI();
+        resetPrimaryUI();
         result = undefined;
         operator = undefined;
     }
@@ -149,19 +149,19 @@
         if (e.target.classList.contains("number-keys")) {
             if (result !== undefined && operator === undefined) {
                 result = undefined;
-                resetUI();
+                resetPrimaryUI();
             }
             else if (primaryDisplayNumber === "ERROR")
             {
-                resetUI();
+                resetPrimaryUI();
             }
-            writePrimaryDisplayNumber(e.target);
+            updatePrimaryDisplay(e.target);
         }
         else if (e.target.classList.contains("operators")) {
             if (result === undefined && operator === undefined && primaryDisplayNumber !== "ERROR") {
                 operator = e.target.value;
                 result = parseFloat(primaryDisplayNumber);
-                resetUI();
+                resetPrimaryUI();
             }
             else if (result !== undefined && operator === undefined){
                 operator = e.target.value;
@@ -169,7 +169,7 @@
             else if (result !== undefined && operator !== undefined) {
                 result = operate(result,parseFloat(primaryDisplayNumber),operator);
                 operator = e.target.value;
-                resetUI();
+                resetPrimaryUI();
                 primaryDisplay.textContent = result;
                 errorHandling(result);
             }        
@@ -177,7 +177,7 @@
         else if (e.target.id === "equal") {
             if (result !== undefined && operator !== undefined) {
                 result = operate(result,parseFloat(primaryDisplayNumber),operator);
-                resetUI();
+                resetPrimaryUI();
                 primaryDisplay.textContent = result;
                 operator = undefined;
                 errorHandling(result);
