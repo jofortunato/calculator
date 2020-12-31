@@ -85,10 +85,6 @@
         hasDecimalPoint = false;
         primaryDisplay.textContent = "";
 
-        /* Not yet developed:
-        secundaryDisplay.textContent = "";
-        */
-
         for (let i = 0; i < keys.length; ++i) {
             enableButton(keys[i]);
         }
@@ -96,6 +92,7 @@
 
     function clearAll() {
         resetPrimaryUI();
+        secundaryDisplay.textContent = "";
         result = undefined;
         operator = undefined;
     }
@@ -115,6 +112,16 @@
             primaryDisplayNumber = "ERROR"
             primaryDisplay.textContent = "ERROR";
         }
+    }
+
+    function updateSecundaryDisplay (value, operator, clearDisplay = false) {
+        
+        if (clearDisplay) {
+            secundaryDisplay.textContent = "";
+        }
+
+        secundaryDisplay.textContent =
+                secundaryDisplay.textContent.concat(" ",value, " ", operator);
     }
 
     let primaryDisplayNumber = "";
@@ -151,6 +158,9 @@
                 result = undefined;
                 resetPrimaryUI();
             }
+            else if (result !== undefined && operator !== undefined) {
+                updateSecundaryDisplay(result, operator, true);
+            }
             else if (primaryDisplayNumber === "ERROR")
             {
                 resetPrimaryUI();
@@ -162,13 +172,16 @@
                 operator = e.target.value;
                 result = parseFloat(primaryDisplayNumber);
                 resetPrimaryUI();
+                updateSecundaryDisplay(result, operator, true);
             }
             else if (result !== undefined && operator === undefined){
                 operator = e.target.value;
+                updateSecundaryDisplay(result, operator, true);
             }
             else if (result !== undefined && operator !== undefined) {
                 result = operate(result,parseFloat(primaryDisplayNumber),operator);
                 operator = e.target.value;
+                updateSecundaryDisplay(primaryDisplayNumber, operator);
                 resetPrimaryUI();
                 primaryDisplay.textContent = result;
                 errorHandling(result);
@@ -177,6 +190,7 @@
         else if (e.target.id === "equal") {
             if (result !== undefined && operator !== undefined) {
                 result = operate(result,parseFloat(primaryDisplayNumber),operator);
+                updateSecundaryDisplay(primaryDisplayNumber, "=");
                 resetPrimaryUI();
                 primaryDisplay.textContent = result;
                 operator = undefined;

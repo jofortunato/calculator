@@ -10,7 +10,6 @@ These are the main features the app must have:
 ## Current Status:
 
 Calculator is working properly.
-There is not a secundary display to show the previous calculations steps (there is a dummy value inserted for UI purposes only).
 Does not support keyboard inputs yet.
 
 ## Motivation
@@ -31,7 +30,7 @@ This part of the [The Odin Project](https://www.theodinproject.com/) foundations
 - [x] Create the clear() function - must clean the displays and delete all stored values;
 - [x] Add a "." button and let users input decimals. Don’t let users type more than one: disable the decimal button if there’s already one in the display;
 - [x] Add a “backspace” button, so the user can undo if they click the wrong number.
-- [ ] Add secundary view with history of the current calculation.
+- [x] Add secundary view with history of the current calculation.
 - [ ] Add keyboard support.
 
 ## Bugs, Advices and Lessons Learned
