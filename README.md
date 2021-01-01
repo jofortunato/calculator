@@ -10,7 +10,6 @@ These are the main features the app must have:
 ## Current Status:
 
 Calculator is working properly.
-Does not support keyboard inputs yet.
 
 ## Motivation
 
@@ -31,7 +30,7 @@ This part of the [The Odin Project](https://www.theodinproject.com/) foundations
 - [x] Add a "." button and let users input decimals. Don’t let users type more than one: disable the decimal button if there’s already one in the display;
 - [x] Add a “backspace” button, so the user can undo if they click the wrong number.
 - [x] Add secundary view with history of the current calculation.
-- [ ] Add keyboard support.
+- [x] Add keyboard support.
 
 ## Bugs, Advices and Lessons Learned
 

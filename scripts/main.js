@@ -31,12 +31,12 @@
         return parseFloat(operationResult.toPrecision(maxPrimaryDisplayLength));
     }
 
-    function updatePrimaryDisplay (numberButton) {
+    function updatePrimaryDisplay (numberValue) {
         if (primaryDisplayNumber.length >= maxPrimaryDisplayLength) {
             return;
         }
         
-        if (numberButton.value === "-") {
+        if (numberValue === "-") {
             if (primaryDisplayNumber.length !== 0) {
                 if (primaryDisplayNumber === "0.") {
                     return;
@@ -49,29 +49,29 @@
                 }
             }
             else {
-                primaryDisplayNumber += numberButton.value;
+                primaryDisplayNumber += numberValue;
             }
         }
-        else if (numberButton.value === ".") {
+        else if (numberValue === ".") {
             if (hasDecimalPoint === true) {
                 return;
             }
             else {
                 hasDecimalPoint = true;
-                disableButton(numberButton);
+                disableButton(decimalButton);
                 if (primaryDisplayNumber.length === 0 || primaryDisplayNumber === "-") {
-                    primaryDisplayNumber += "0" + numberButton.value;
+                    primaryDisplayNumber += "0" + numberValue;
                 }
                 else {
-                    primaryDisplayNumber += numberButton.value;
+                    primaryDisplayNumber += numberValue;
                 }
             }
         }
-        else if (numberButton.value === "0" && primaryDisplayNumber === "0") {
+        else if (numberValue === "0" && primaryDisplayNumber === "0") {
             return;
         }
         else {
-            primaryDisplayNumber += numberButton.value;
+            primaryDisplayNumber += numberValue;
         }
         
         primaryDisplay.textContent = primaryDisplayNumber; 
@@ -124,7 +124,7 @@
                 secundaryDisplay.textContent.concat(" ",value, " ", operator);
     }
 
-    function processNumberSelection (numberKey) {
+    function processNumberSelection (numberValue) {
         if (result !== undefined && operator === undefined) {
             result = undefined;
             resetPrimaryUI();
@@ -136,7 +136,7 @@
         {
             resetPrimaryUI();
         }
-        updatePrimaryDisplay(numberKey);
+        updatePrimaryDisplay(numberValue);
     }
 
     function processOperatorSelection (operatorSelected) {
@@ -186,6 +186,8 @@
     const decimalButton = document.querySelector("#decimal");
 
     let isOnDarkTheme = false;
+    let reNumbers = new RegExp("[0-9\.]");
+    let reOperators = new RegExp("[\+\*-/]");
 
     darkThemeToggle.addEventListener("click", () => {
         if (!isOnDarkTheme) {
@@ -201,7 +203,7 @@
 
     keysContainer.addEventListener("click", e => {
         if (e.target.classList.contains("number-keys")) {
-            processNumberSelection(e.target);
+            processNumberSelection(e.target.value);
         }
         else if (e.target.classList.contains("operators")) {
             processOperatorSelection(e.target.value);        
@@ -216,5 +218,21 @@
             backspace();
         }
     }, false);
+
+    document.addEventListener("keyup", e => {
+        if (reNumbers.test(e.key)) {
+            console.log(e.key);
+            processNumberSelection(e.key);
+        }
+        else if (reOperators.test(e.key)) {
+            processOperatorSelection(e.key);        
+        }
+        else if (e.key === "Enter") {
+            processEqualSelection();
+        }
+        else if (e.key === "Backspace") {
+            backspace();
+        }
+    },false)
     
 })();
