@@ -124,6 +124,53 @@
                 secundaryDisplay.textContent.concat(" ",value, " ", operator);
     }
 
+    function processNumberSelection (numberKey) {
+        if (result !== undefined && operator === undefined) {
+            result = undefined;
+            resetPrimaryUI();
+        }
+        else if (result !== undefined && operator !== undefined) {
+            updateSecundaryDisplay(result, operator, true);
+        }
+        else if (primaryDisplayNumber === "ERROR")
+        {
+            resetPrimaryUI();
+        }
+        updatePrimaryDisplay(numberKey);
+    }
+
+    function processOperatorSelection (operatorSelected) {
+        if (result === undefined && operator === undefined && primaryDisplayNumber !== "ERROR") {
+            operator = operatorSelected;
+            result = parseFloat(primaryDisplayNumber);
+            resetPrimaryUI();
+            updateSecundaryDisplay(result, operator, true);
+        }
+        else if (result !== undefined && operator === undefined){
+            operator = operatorSelected;
+            updateSecundaryDisplay(result, operator, true);
+        }
+        else if (result !== undefined && operator !== undefined) {
+            result = operate(result,parseFloat(primaryDisplayNumber),operator);
+            operator = operatorSelected;
+            updateSecundaryDisplay(primaryDisplayNumber, operator);
+            resetPrimaryUI();
+            primaryDisplay.textContent = result;
+            errorHandling(result);
+        }
+    }
+
+    function processEqualSelection () {
+        if (result !== undefined && operator !== undefined) {
+            result = operate(result,parseFloat(primaryDisplayNumber),operator);
+            updateSecundaryDisplay(primaryDisplayNumber, "=");
+            resetPrimaryUI();
+            primaryDisplay.textContent = result;
+            operator = undefined;
+            errorHandling(result);
+        }
+    }
+
     let primaryDisplayNumber = "";
     const maxPrimaryDisplayLength = 10;
     let hasDecimalPoint = false;
@@ -154,48 +201,13 @@
 
     keysContainer.addEventListener("click", e => {
         if (e.target.classList.contains("number-keys")) {
-            if (result !== undefined && operator === undefined) {
-                result = undefined;
-                resetPrimaryUI();
-            }
-            else if (result !== undefined && operator !== undefined) {
-                updateSecundaryDisplay(result, operator, true);
-            }
-            else if (primaryDisplayNumber === "ERROR")
-            {
-                resetPrimaryUI();
-            }
-            updatePrimaryDisplay(e.target);
+            processNumberSelection(e.target);
         }
         else if (e.target.classList.contains("operators")) {
-            if (result === undefined && operator === undefined && primaryDisplayNumber !== "ERROR") {
-                operator = e.target.value;
-                result = parseFloat(primaryDisplayNumber);
-                resetPrimaryUI();
-                updateSecundaryDisplay(result, operator, true);
-            }
-            else if (result !== undefined && operator === undefined){
-                operator = e.target.value;
-                updateSecundaryDisplay(result, operator, true);
-            }
-            else if (result !== undefined && operator !== undefined) {
-                result = operate(result,parseFloat(primaryDisplayNumber),operator);
-                operator = e.target.value;
-                updateSecundaryDisplay(primaryDisplayNumber, operator);
-                resetPrimaryUI();
-                primaryDisplay.textContent = result;
-                errorHandling(result);
-            }        
+            processOperatorSelection(e.target.value);        
         }
         else if (e.target.id === "equal") {
-            if (result !== undefined && operator !== undefined) {
-                result = operate(result,parseFloat(primaryDisplayNumber),operator);
-                updateSecundaryDisplay(primaryDisplayNumber, "=");
-                resetPrimaryUI();
-                primaryDisplay.textContent = result;
-                operator = undefined;
-                errorHandling(result);
-            }
+            processEqualSelection();
         }
         else if (e.target.id === "clear-all") {
             clearAll();
